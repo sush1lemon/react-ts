@@ -64,7 +64,6 @@ const TodoForm = () => {
   }
 
   const deleteTodo = async () => {
-    console.log('here')
     await axios.delete(`/todo/${id}`)
       .then(() => {
         navigate('/')

@@ -1,8 +1,6 @@
 import {Link} from "react-router-dom";
 import React, {SyntheticEvent, useEffect, useState} from "react";
-import useAuth from "../hooks/useAuth";
 import {AuthenticatedUser, User} from "../types/user.d";
-import useAxios from "../hooks/useAxios";
 import axios from "../api/axios";
 
 const SignUp = () => {
@@ -22,6 +20,10 @@ const SignUp = () => {
 
   const register = async (e: SyntheticEvent) => {
     e.preventDefault()
+
+    if (!(username && password && firstName && lastName)) {
+      return setErrMsg('Please fill up the form.')
+    }
 
     const user : User = {
       first_name: firstName, last_name: lastName,
