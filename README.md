@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+## Deployed at [react-project-ts.pages.dev](https://react-project-ts.pages.dev/login)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
