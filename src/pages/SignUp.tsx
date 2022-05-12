@@ -15,7 +15,6 @@ const SignUp = () => {
 
   useEffect(() => {
     setErrMsg("")
-    setSuccessMsg("")
   }, [username, password, firstName, lastName])
 
   const register = async (e: SyntheticEvent) => {
@@ -35,12 +34,12 @@ const SignUp = () => {
     setSuccessMsg("")
     await axios.post('/user/sign-up', user)
       .then(() => {
-        setSuccessMsg('Registration success!')
         setErrMsg("")
         setUsername("")
         setPassword("")
         setFirstName("")
         setLastName("")
+        setSuccessMsg('Registration success!')
       })
       .catch((err) => {
         const { response } = err;
@@ -94,16 +93,12 @@ const SignUp = () => {
             <input className="border rounded px-4 py-4 w-full" type="password" value={password}
                    onChange={e => setPassword(e.target.value)}/>
           </div>
-          <div className="text-red-400">
-            {
-              errMsg && errMsg
-            }
-          </div>
-          <div className="text-green-400">
-            {
-              successMsg && successMsg
-            }
-          </div>
+          {
+            errMsg && <div className="text-red-400 font-bold">{errMsg}</div>
+          }
+          {
+            successMsg && <div className="text-green-400 font-bold">{successMsg}</div>
+          }
           <button disabled={loading} type="submit"
                   className="bg-green-500 py-4 rounded font-bold text-white disabled:opacity-50 disabled:cursor-progress">Signup
           </button>
