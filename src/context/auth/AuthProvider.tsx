@@ -2,7 +2,6 @@ import React, {useState, FC, createContext, ReactNode} from 'react';
 import {AuthenticatedUser} from "../../types/user.d";
 import {AuthContextDefault, AuthContextInterface} from "./AuthContext";
 import axios from "../../api/axios";
-import {useNavigate} from "react-router-dom";
 
 const AUTH_URL = "/user/login";
 const LOGOUT_URL = "/user/logout";
@@ -41,13 +40,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   }
 
   const logout = () : Promise<any> => {
-    return new Promise((resolve, reject) => axios.get(LOGOUT_URL, {
+    setAuth(null)
+    return new Promise((resolve, reject) => axios(LOGOUT_URL, {
       withCredentials: true
     })
       .then(resolve)
       .catch(reject)
       .finally(() => {
-        setAuth(null)
       }))
   }
 

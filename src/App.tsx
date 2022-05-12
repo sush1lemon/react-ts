@@ -12,6 +12,7 @@ import Page404 from "./components/Page404";
 import PersistLogin from "./components/PersistLogin";
 import TodoForm from "./components/todo/TodoForm";
 import RedirectWhenAuthenticated from "./components/RedirectWhenAuthenticated";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route element={<PersistLogin/>}>
           <Route element={<RedirectWhenAuthenticated/>}>
             <Route path="/login" element={<Login/>}/>
+            <Route path="/sign-up" element={<SignUp/>}></Route>
           </Route>
 
           <Route element={<RouteGuard/>}>

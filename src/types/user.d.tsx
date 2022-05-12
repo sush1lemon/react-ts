@@ -4,7 +4,17 @@ interface AuthenticatedUser {
   last_name: string,
   access_token: string,
 }
+
+
+interface User {
+  id?: string,
+  username: string,
+  password?: string,
+  first_name: string,
+  last_name: string,
+}
+
 interface AdminUser extends AuthenticatedUser{
   role: "admin"
 }
-export type { AuthenticatedUser, AdminUser }
+export type { AuthenticatedUser, AdminUser, User }

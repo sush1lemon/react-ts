@@ -8,6 +8,7 @@ const TodoForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [status, setStatus] = useState(true);
+  const [loading, setLoading] = useState(false);
   const axios = useAxios()
   const navigate = useNavigate()
   const {id} = useParams()
@@ -47,12 +48,18 @@ const TodoForm = () => {
       .then(() => {
         navigate('/');
       })
+      .finally(() => {
+        setLoading(false)
+      })
   }
 
   const updateTodo = async (data: Todo) => {
     await axios.put(`/todo/${id}`, data)
       .then(() => {
         navigate('/')
+      })
+      .finally(() => {
+        setLoading(false)
       })
   }
 
@@ -61,6 +68,9 @@ const TodoForm = () => {
     await axios.delete(`/todo/${id}`)
       .then(() => {
         navigate('/')
+      })
+      .finally(() => {
+        setLoading(false)
       })
   }
 
@@ -93,11 +103,11 @@ const TodoForm = () => {
             </div>
             <div className="flex gap-4 justify-end">
               {
-                id && <button type="button"
+                id && <button type="button" disabled={loading}
                               className="self-end bg-red-400 px-12 py-4 rounded font-bold text-white disabled:opacity-50 disabled:cursor-progress"
                               onClick={deleteTodo}>Delete</button>
               }
-              <button type="submit"
+              <button type="submit" disabled={loading}
                       className="self-end bg-green-500 px-12 py-4 rounded font-bold text-white disabled:opacity-50 disabled:cursor-progress">Save
               </button>
             </div>
