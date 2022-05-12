@@ -8,14 +8,14 @@ import useAuth from "../hooks/useAuth";
 
 const Home = () => {
 
-  // const axios = useAxios()
+  const axios = useAxios()
   const { logout } = useAuth();
   const [todos, setTodos] = useState<Todos>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserTodos = () => {
-      axiosPrivate.get<Todos>('/user/todos')
+      axios.get<Todos>('/user/todos')
         .then(({ data }) => {
           setTodos(data)
         })
