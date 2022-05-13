@@ -3,7 +3,7 @@ import React from "react";
 
 const TodoItem = ({todo, onClick}: Props) => {
   return (
-    <div className="flex flex-col gap-1 cursor-pointer p-8 col-span-4 border rounded" onClick={() => onClick(todo)}>
+    <div className="flex flex-col gap-1 cursor-pointer p-8 col-span-12 md:col-span-4 border rounded" onClick={() => onClick(todo)}>
       <h1 className="font-bold">{todo.title}</h1>
       <p className="whitespace-pre-line">{todo.content}</p>
       <div>

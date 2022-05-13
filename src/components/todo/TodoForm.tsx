@@ -83,7 +83,7 @@ const TodoForm = () => {
   return (
     <div className="flex justify-center items-center h-screen">
 
-      <div className="basis-[30%] flex flex-col gap-3">
+      <div className="w-full lg:basis-[30%] flex flex-col gap-3">
         <div className="flex justify-end">
           <Link to="/" className="font-medium cursor-pointer">
             Go Back
