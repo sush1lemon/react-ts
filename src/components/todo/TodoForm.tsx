@@ -105,7 +105,7 @@ const TodoForm = () => {
               <textarea className="border rounded px-4 py-4 w-full h-64" value={content}
                         onChange={(e) => setContent(e.target.value)}/>
             </div>
-            { errorMsg && (<div className="text-red-400">errorMsg</div>) }
+            { errorMsg && (<div className="text-red-400">{errorMsg}</div>) }
             <div className="flex justify-end items-center gap-2">
               <input type="checkbox" id="status" name="status" defaultChecked={!status} onChange={() => setStatus(false)}/>
               <label htmlFor="status">Mark as Done</label>
