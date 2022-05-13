@@ -13,6 +13,7 @@ import PersistLogin from "./components/PersistLogin";
 import TodoForm from "./components/todo/TodoForm";
 import RedirectWhenAuthenticated from "./components/RedirectWhenAuthenticated";
 import SignUp from "./pages/SignUp";
+import HomeLayout from "./components/layouts/Home";
 
 function App() {
   return (
@@ -26,9 +27,7 @@ function App() {
           </Route>
 
           <Route element={<RouteGuard/>}>
-            <Route path="/" element={<Home/>}></Route>
-            <Route path="/new-todo" element={<TodoForm/>}></Route>
-            <Route path="/edit-todo/:id" element={<TodoForm/>}></Route>
+            <Route path="/*" element={<HomeLayout/>}></Route>
           </Route>
         </Route>
 

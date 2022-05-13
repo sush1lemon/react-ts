@@ -7,11 +7,11 @@ interface AuthenticatedUser {
 
 
 interface User {
-  id?: string,
+  _id?: string,
   username: string,
   password?: string,
-  first_name: string,
-  last_name: string,
+  firstName: string,
+  lastName: string,
 }
 
 interface AdminUser extends AuthenticatedUser{

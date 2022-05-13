@@ -9,6 +9,7 @@ const TodoForm = () => {
   const [content, setContent] = useState("");
   const [status, setStatus] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const axios = useAxios()
   const navigate = useNavigate()
   const {id} = useParams()
@@ -29,6 +30,11 @@ const TodoForm = () => {
     id && setEditData()
   }, [])
 
+  useEffect(() => {
+    setErrorMsg("")
+  }, [title, content]);
+
+
   const submitForm = async (e: SyntheticEvent) => {
     e.preventDefault()
     const data: Todo = {
@@ -36,6 +42,7 @@ const TodoForm = () => {
       content: content,
       status: status
     }
+    if (!(title && content)) return setErrorMsg("Please fill up fields.");
     if (id) {
       await updateTodo(data)
     } else {
@@ -98,7 +105,10 @@ const TodoForm = () => {
               <textarea className="border rounded px-4 py-4 w-full h-64" value={content}
                         onChange={(e) => setContent(e.target.value)}/>
             </div>
-            <div className="text-red-400">
+            { errorMsg && (<div className="text-red-400">errorMsg</div>) }
+            <div className="flex justify-end items-center gap-2">
+              <input type="checkbox" id="status" name="status" defaultChecked={!status} onChange={() => setStatus(false)}/>
+              <label htmlFor="status">Mark as Done</label>
             </div>
             <div className="flex gap-4 justify-end">
               {

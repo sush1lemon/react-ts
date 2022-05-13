@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import React, {SyntheticEvent, useEffect, useState} from "react";
-import {AuthenticatedUser, User} from "../types/user.d";
+import {User} from "../types/user.d";
 import axios from "../api/axios";
 
 const SignUp = () => {
@@ -24,8 +24,8 @@ const SignUp = () => {
       return setErrMsg('Please fill up the form.')
     }
 
-    const user : User = {
-      first_name: firstName, last_name: lastName,
+    const user: User = {
+      firstName: firstName, lastName: lastName,
       username,
       password
     }
@@ -42,10 +42,10 @@ const SignUp = () => {
         setSuccessMsg('Registration success!')
       })
       .catch((err) => {
-        const { response } = err;
+        const {response} = err;
         if (response?.data?.message) {
           setErrMsg(response.data.message)
-        }else {
+        } else {
           setErrMsg('Error on creating user')
         }
       })

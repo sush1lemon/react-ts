@@ -1,5 +1,5 @@
 import useAuth from "../hooks/useAuth";
-import {Navigate, Outlet, useLocation} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 
 const RouteGuard = () => {
   const { user } = useAuth()
