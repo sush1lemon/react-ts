@@ -18,5 +18,5 @@
 }
 
 .-sidebar{
-  @apply w-[260px] min-w-[260px] hidden fixed lg:sticky h-screen z-10 lg:flex bg-cyan-500 min-h-screen flex flex-col items-center gap-1 top-0;
+  @apply w-[260px] min-w-[260px] hidden fixed lg:sticky h-screen z-30 lg:flex bg-cyan-500 min-h-screen flex flex-col items-center gap-1 top-0;
 }

@@ -3,7 +3,7 @@ import React from "react";
 
 const TodoItem = ({todo, onClick}: Props) => {
   return (
-    <div className="cursor-pointer col-span-12 md:col-span-4 border rounded relative" onClick={() => onClick(todo)}>
+    <div className="cursor-pointer col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-4 border rounded relative" onClick={() => onClick(todo)}>
       <div className="grid h-full">
         <div className="flex  p-8  flex-col gap-2 z-10" style={{gridArea: "1/1/auto/auto"}}>
           <h1 className="font-bold">{todo.title}</h1>

@@ -45,7 +45,7 @@ const HomeLayout = () => {
         </div>
       </div>
       <div className="w-full flex flex-col">
-        <div className="bg-gray-100 w-full h-20 flex items-center justify-between px-4 sticky top-0">
+        <div className="bg-gray-100 w-full h-20 flex items-center justify-between px-4 sticky top-0 z-20">
           <div className="inline cursor-pointer" onClick={handleClick}>
             <div className="bar1"></div>
             <div className="bar2"></div>
