@@ -4,19 +4,25 @@ import {Todo, Todos} from "../types/todo.d";
 import {Link, useNavigate} from "react-router-dom";
 import TodoItem from "../components/todo";
 import useAuth from "../hooks/useAuth";
+import {Spinner} from "../components/Spinner";
 
 const Home = () => {
 
   const axios = useAxios()
   const {logout} = useAuth();
   const [todos, setTodos] = useState<Todos>([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true)
     const fetchUserTodos = () => {
       axios.get<Todos>('/user/todos')
         .then(({data}) => {
           setTodos(data)
+        })
+        .finally(() => {
+          setLoading(false)
         })
     }
 
@@ -42,15 +48,16 @@ const Home = () => {
         </Link>
       </div>
       {
-        todos.length > 0 ?
-          <div className="grid grid-cols-12 gap-8" style={{gridAutoRows: "1fr"}}>
-          {todos.map((todo) => (
-            <TodoItem todo={todo} key={todo._id as string} onClick={editTodo}/>
-          ))}
-        </div> :
-          <div className="flex justify-center items-center mt-20">
-            <h1 className="text-3xl text-gray-600">You have nothing todo.</h1>
-          </div>
+        loading ? <Spinner/> :
+          todos.length > 0 ?
+            <div className="grid grid-cols-12 gap-8" style={{gridAutoRows: "1fr"}}>
+              {todos.map((todo) => (
+                <TodoItem todo={todo} key={todo._id as string} onClick={editTodo}/>
+              ))}
+            </div> :
+            <div className="flex justify-center items-center mt-20">
+              <h1 className="text-3xl text-gray-600">You have nothing todo.</h1>
+            </div>
       }
     </div>
   )
