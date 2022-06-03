@@ -3,8 +3,8 @@ import {AuthenticatedUser} from "../../types/user.d";
 import {AuthContextDefault, AuthContextInterface} from "./AuthContext";
 import axios from "../../api/axios";
 
-const AUTH_URL = "/user/login";
-const LOGOUT_URL = "/user/logout";
+const AUTH_URL = "/auth/login";
+const LOGOUT_URL = "/auth/logout";
 
 interface AuthProviderProps {
   children?: ReactNode;

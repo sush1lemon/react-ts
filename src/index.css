@@ -19,3 +19,8 @@ code {
 .-nav-link{
   @apply py-4 w-full flex justify-center font-bold text-white cursor-pointer hover:bg-cyan-600;
 }
+
+.ql-video{
+  width: 100%;
+  height: 300px;
+}
