@@ -19,7 +19,7 @@ export const CreateCommentSection = ({ parent_id, hideUsername, cancelButton, su
     if (comment == '<p><br></p>') return;
 
     setLoading(true);
-    axios.post('/comment', {post_id: postId, content: comment, subReddit_id: subReddit?._id, parent_id})
+    axios.post('/comment', {post_id: postId, content: comment, subReddit_id: subReddit?.id, parent_id})
       .finally(() => {
         setLoading(false);
         setComment('');

@@ -1,27 +1,27 @@
-interface SubReddit{
-  _id?: object;
+import {SubRedditType} from "./prisma.d";
 
-  name: string;
-
-  description: string;
-
-  type: 'public' | 'restricted' | 'private';
-
-  nsfw: boolean;
-
-  members: number;
-
-  topic?: Array<any>;
-
-  created_at: Date;
-
-  moderators: Array<any>;
+export type SubReddit = {
+  id: string
+  name: string
+  description: string | null
+  type: SubRedditType
+  nsfw: boolean
+  members: number
+  createdAt: Date
 }
 
-interface SubRedditSelectItem {
+/**
+ * Model SubRedditMember
+ *
+ */
+export type SubRedditMember = {
+  id: string
+  userId: string
+  subRedditId: string
+}
+
+export type SubRedditSelectItem = {
   image: string,
   label: string;
   value: any;
 }
-
-export type { SubReddit, SubRedditSelectItem }

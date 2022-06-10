@@ -1,9 +1,9 @@
 import useAxios from "./useAxios";
-import {PostVote} from "../types/post.d";
+import {CreatePostVote} from "../types/post.d";
 
 export const useVote = () => {
   const axios = useAxios();
-  return (vote: PostVote) => {
+  return (vote: CreatePostVote) => {
     return axios.post('/post-vote', vote)
   }
 }

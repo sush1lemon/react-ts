@@ -1,32 +1,18 @@
-interface Comment {
-  _id: object;
+import {User} from "./user.d";
 
-  post_id: object;
-
-  user_id: CommentUser;
-
-  subReddit_id: object;
-
-  content: string;
-
-  parent_id?: object | null;
-
-  upVotes?: number;
-
-  downVotes?: number;
-
-  created_at?: Date;
-
-  comments?: Comments;
+/**
+ * Model Comment
+ *
+ */
+export type Comment = {
+  id: string
+  postId: string
+  userId: string
+  content: string
+  upVotes: number
+  downVotes: number
+  createdAt: Date
+  parentId: string | null
+  comments?: Comment[],
+  user?: User,
 }
-
-type Comments = Comment[]
-
-interface CommentUser{
-  _id: string,
-  username: string,
-  firstName: string,
-  lastName: string
-}
-
-export type { Comment, Comments }

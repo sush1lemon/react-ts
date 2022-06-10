@@ -1,5 +1,5 @@
 interface AuthenticatedUser {
-  id: string,
+  id: number,
   username: string,
   first_name: string,
   last_name: string,
@@ -8,7 +8,7 @@ interface AuthenticatedUser {
 
 
 interface User {
-  _id?: string,
+  id?: number,
   username: string,
   password?: string,
   firstName: string,

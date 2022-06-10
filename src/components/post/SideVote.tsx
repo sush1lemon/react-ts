@@ -2,7 +2,7 @@ import {MediaQuery, Paper, Text, useMantineTheme} from "@mantine/core";
 import {ArrowBigDown, ArrowBigTop} from "tabler-icons-react";
 import {useVote} from "../../hooks/useVote";
 import useSubReddit from "../../hooks/useSubReddit";
-import {PostVote, Vote} from "../../types/post.d";
+import {CreatePostVote, Vote} from "../../types/post.d";
 import useAuth from "../../hooks/useAuth";
 import {useState} from "react";
 
@@ -18,9 +18,9 @@ export const SideVote = ({count, vote, post_id}: Props) => {
 
 
   const castVote = (vote: Vote) => {
-    const data: PostVote = {
+    const data: CreatePostVote = {
       vote: vote,
-      post_id: post_id
+      postId: post_id
     }
     votePost(data)
       .then(({data}) => {
@@ -40,11 +40,11 @@ export const SideVote = ({count, vote, post_id}: Props) => {
         borderRadius: 0
       })}>
         <ArrowBigTop className="cursor-pointer" strokeWidth={1} size={28}
-                     color={userVote == 'upVote' ? theme.colors.blue[9] : defaultColor}
+                     color={userVote === 'upVote' ? theme.colors.blue[9] : defaultColor}
                      onClick={() => castVote('upVote')}/>
         <Text size={"sm"} weight={400}>{votes ?? 0}</Text>
         <ArrowBigDown className="cursor-pointer" strokeWidth={1} size={28}
-                      color={userVote == 'downVote' ? theme.colors.orange[9] : defaultColor}
+                      color={userVote === 'downVote' ? theme.colors.orange[9] : defaultColor}
                       onClick={() => castVote('downVote')}/>
       </Paper>
     </MediaQuery>
@@ -54,5 +54,5 @@ export const SideVote = ({count, vote, post_id}: Props) => {
 interface Props {
   count?: number;
   vote?: Vote;
-  post_id: object;
+  post_id: string;
 }

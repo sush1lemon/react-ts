@@ -1,13 +1,13 @@
 import {Avatar, Paper} from "@mantine/core";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {Post} from "../types/post.d";
 import useSubReddit from "../hooks/useSubReddit";
 import ax from "../api/axios";
 import {Loading, PostContainer} from "../components/post";
 import {User} from "../types/user.d";
 import {Empty} from "../components/post/Empty";
 import {CommentSection, CreateCommentSection} from "../components/comment";
+import {Post} from "../types/post.d";
 
 export const PostPage = () => {
   const {postId} = useParams();
@@ -22,7 +22,7 @@ export const PostPage = () => {
     if (subReddit !== null) {
       setLoading(true);
       setLoaded(false);
-      ax.get(`/post/${postId}?sub=${subReddit?._id}`)
+      ax.get(`/post/${postId}?sub=${subReddit?.id}`)
         .then(({data}) => {
           setPost(data);
         })
@@ -42,7 +42,7 @@ export const PostPage = () => {
         {
           loading ? <Loading></Loading> :
             loaded && post ?
-            <PostContainer postedBy={post?.user_id as User} post={post as Post}
+            <PostContainer postedBy={post?.user as User} post={post as Post}
                            createCommentSection={<CreateCommentSection/>}
                            commentSection={<CommentSection/>}/>
               : <Empty></Empty>

@@ -1,40 +1,48 @@
-interface Post {
-  _id: object;
+import {User} from "./user.d";
+import {SubReddit} from "./subReddit.d";
+import {Comment} from "./comment.d";
 
-  user_id: object;
 
-  subReddit_id: any;
+export type CreatePost = Omit<Post, "id" | "upVotes" | "downVotes" | "commentCount" | "createdAt" | "userId">
 
-  title: string;
-
-  content?: string;
-
-  flairs?: Array<any>;
-
-  upVotes: number;
-
-  downVotes: number;
-
-  comments: number;
-
-  created_at: Date;
+/**
+ * Model Post
+ *
+ */
+export type Post = {
+  id: string
+  title: string
+  content: string | null
+  upVotes: number
+  downVotes: number
+  commentCount: number
+  createdAt: Date
+  subRedditId: string
+  userId: string
+  user?: User
+  subReddit?: SubReddit
+  comments?: Comment[]
 }
 
-interface CreatePost {
-  subReddit_id: any;
 
-  title: string;
-
-  content: string;
-
-  flairs?: Array<any>;
+/**
+ * Model PostVote
+ *
+ */
+export type PostVote = {
+  id: string
+  postId: string
+  userId: string
+  vote: Vote
+  lastVote: Vote
 }
 
-interface PostVote {
-  vote: Vote,
-  user_id?: string,
-  post_id: object
-}
 
-type Vote = 'upVote' | 'downVote';
-export type {Post, CreatePost, PostVote, Vote}
+const Vote = {
+  upVote: 'upVote',
+  downVote: 'downVote'
+};
+
+export type Vote = (typeof Vote)[keyof typeof Vote]
+
+export type CreatePostVote = Omit<PostVote, "id" | "lastVote" | "userId">

@@ -1,9 +1,9 @@
 import {Avatar, Button, Divider, Text, TypographyStylesProvider} from "@mantine/core";
 import React, {useState} from "react";
-import {Comments, Comment} from "../../types/comment.d";
 import {ActionButton} from "../post/ActionButton";
 import {Message} from "tabler-icons-react";
 import {CreateCommentSection} from "./CreateCommentSection";
+import {Comment} from "../../types/comment.d";
 
 export const CommentElement = ({ comment , level }: Props) => {
   const [showCreateComment, setShowCreateComment] = useState(false);
@@ -14,7 +14,7 @@ export const CommentElement = ({ comment , level }: Props) => {
           <Avatar radius="xl" size={32}></Avatar>
         </div>
         <div className="flex-1 flex items-center">
-          <Text size="sm">{comment.user_id.username}</Text>
+          <Text size="sm">{comment.user?.username}</Text>
           <br/>
         </div>
       </div>
@@ -27,14 +27,16 @@ export const CommentElement = ({ comment , level }: Props) => {
             <div dangerouslySetInnerHTML={{ __html: comment.content as string }} />
           </TypographyStylesProvider>
           <div className="flex items-center">
-            <ActionButton text="Reply" icon={<Message size={24}/>} onClick={()=> setShowCreateComment(true)} />
+            <ActionButton text="Reply" icon={<Message size={24}/>} onClick={()=> {
+              level < 5 && setShowCreateComment(true)
+            }} />
             <ActionButton text="Report"/>
           </div>
 
           <div>
             {
               showCreateComment &&
-              <CreateCommentSection submitText="Reply" hideUsername={true} parent_id={comment._id as any as string} cancelButton={
+              <CreateCommentSection submitText="Reply" hideUsername={true} parent_id={comment.id} cancelButton={
                 <Button type="button" radius="lg" onClick={() => setShowCreateComment(false)}>
                   Cancel
                 </Button>
@@ -43,7 +45,7 @@ export const CommentElement = ({ comment , level }: Props) => {
           </div>
           {
             comment.comments && comment.comments.map((comment) => (
-              <CommentElement level={level+1} key={comment._id as any as string} comment={comment}/>
+              <CommentElement level={level+1} key={comment.id} comment={comment}/>
             ))
           }
         </div>

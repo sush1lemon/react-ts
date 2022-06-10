@@ -27,7 +27,7 @@ export const CreatePostElement = () => {
 
   useEffect(() => {
     const controller = new AbortController;
-    ax.get<SubReddit[]>('/community', {
+    ax.get<SubReddit[]>('/subreddit', {
       signal: controller.signal
     })
       .then(({data}) => {
@@ -37,7 +37,7 @@ export const CreatePostElement = () => {
           const item: SubRedditSelectItem = {
             label: `r/${sr.name}`,
             image: '',
-            value: JSON.stringify({id: sr._id as any as string, name: sr.name})
+            value: JSON.stringify({id: sr.id, name: sr.name})
           }
           if (name) {
             if (name === sr.name) {
@@ -75,7 +75,7 @@ export const CreatePostElement = () => {
     if (content == '<p><br></p>') return setContentError(true);
 
     const data: CreatePost = {
-      subReddit_id: subReddit?._id,
+      subRedditId: subReddit?.id as string,
       content: content,
       title: title,
     }
@@ -83,7 +83,7 @@ export const CreatePostElement = () => {
     setLoading(true)
     axios.post<Post>('/post', data)
       .then(({data}) => {
-        navigate(`/r/${subReddit?.name}/comments/${data._id}/`);
+        navigate(`/r/${subReddit?.name}/comments/${data.id}/`);
       })
       .finally(() => {
         setLoading(false);

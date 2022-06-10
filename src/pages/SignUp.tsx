@@ -32,7 +32,7 @@ const SignUp = () => {
     setLoading(true)
     setErrMsg("")
     setSuccessMsg("")
-    await axios.post('/user/sign-up', user)
+    await axios.post('/user', user)
       .then(() => {
         setErrMsg("")
         setUsername("")

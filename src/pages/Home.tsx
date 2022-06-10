@@ -1,11 +1,11 @@
 import {CreatePostMini, Loading, PostContainer} from "../components/post";
 import useAuth from "../hooks/useAuth";
 import {useEffect, useState} from "react";
-import {Post} from "../types/post.d";
 import {Empty} from "../components/post/Empty";
 import useAxios from "../hooks/useAxios";
 import {User} from "../types/user.d";
 import {Paper} from "@mantine/core";
+import {Post} from "../types/post.d";
 
 
 export const Home = () => {
@@ -41,7 +41,7 @@ export const Home = () => {
             loading ? <Loading/> :
               posts.length === 0 ? <Empty/> :
                 posts.map((post) =>
-                  <PostContainer post={post} postedBy={post.user_id as User} community={post.subReddit_id.name} key={post._id as any as string}  />
+                  <PostContainer post={post} postedBy={post.user as User} community={post.subReddit?.name} key={post.id as any as string}  />
                 )
           }
         </div>

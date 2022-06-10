@@ -5,8 +5,8 @@ import {Avatar, Paper, Text} from "@mantine/core";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
 import {useEffect, useState} from "react";
-import {Post} from "../types/post.d";
 import useSubReddit from "../hooks/useSubReddit";
+import {Post} from "../types/post.d";
 
 export const SubRedditHome = () => {
   const {user} = useAuth();
@@ -19,7 +19,7 @@ export const SubRedditHome = () => {
   useEffect(() => {
     const controller = new AbortController();
     if (subReddit) {
-      axios.get<Post[]>(`/post?subreddit=${subReddit?._id}`, {
+      axios.get<Post[]>(`/post?subreddit=${subReddit?.id}`, {
         signal: controller.signal
       })
         .then(({data}) => {
@@ -44,7 +44,7 @@ export const SubRedditHome = () => {
             loading ? <Loading/> :
               posts.length === 0 ? <Empty/> :
                 posts.map((post) =>
-                  <PostContainer post={post} postedBy={post.user_id as User} key={post._id as any as string}/>
+                  <PostContainer post={post} postedBy={post.user as User} key={post.id as any as string}/>
                 )
           }
         </div>
@@ -54,9 +54,9 @@ export const SubRedditHome = () => {
           <div className="flex flex-col p-4">
             <div className="flex items-center gap-2">
               <Avatar size="md" radius="xl"/>
-              <Text>r/{ subReddit?.name }</Text>
+              <Text>r/{subReddit?.name}</Text>
             </div>
-            <div> { subReddit?.description }</div>
+            <div> {subReddit?.description}</div>
           </div>
         </Paper>
       </div>

@@ -20,7 +20,7 @@ export const SubRedditProvider: FC<Props> = ({children}) => {
 
   useEffect(() => {
     const controller = new AbortController();
-    axios.get<SubReddit>(`/community/name/${name}`, {
+    axios.get<SubReddit>(`/subreddit/name/${name}`, {
       signal: controller.signal
     })
       .then(({data}) => {
